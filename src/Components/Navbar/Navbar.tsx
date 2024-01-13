@@ -4,9 +4,11 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 interface NavbarProps {
   searchPlaceholder: string;
   onSearchChange: (query: string) => void;
+  showSearchButton?: boolean;
+  showPlusButton?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ searchPlaceholder,onSearchChange }) => {
+const Navbar: React.FC<NavbarProps> = ({ searchPlaceholder,onSearchChange ,  showSearchButton, showPlusButton}) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -32,16 +34,22 @@ const Navbar: React.FC<NavbarProps> = ({ searchPlaceholder,onSearchChange }) => 
       // Navigate to the movie page along with the search query
       const encodedQuery = encodeURIComponent(searchQuery);
       navigate(`/search?query=${encodedQuery}`);
-      setSearchQuery(searchQuery);
+      setSearchQuery(encodedQuery);
+      setSearchQuery(searchQuery)
+      
     } else {
+      const encodedQuery = encodeURIComponent(searchQuery);
+      navigate(`/search?query=${encodedQuery}`);
+      setSearchQuery(encodedQuery);
       onSearchChange(searchQuery);
+      setSearchQuery(searchQuery);
       // If already on the movie page, just trigger the search
     }
   };
   
 
   return (
-    <nav className="p-4">
+    <nav className="p-4 w-full">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-black" style={{
           fontFamily: 'FONTSPRING DEMO - Caros Bold',
@@ -54,18 +62,22 @@ const Navbar: React.FC<NavbarProps> = ({ searchPlaceholder,onSearchChange }) => 
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-center sm:hidden">
-          <button className="text-white focus:outline-none" onClick={toggleSearch}>
-            🔍
-          </button>
-          <button className="text-black ms-1 focus:outline-none"style={{
-            fontFamily: "Rounded Mplus 1c Bold",
-            fontSize: "30px",
-            fontWeight: 700,
-          }}>
-            +
-          </button>
+        {showSearchButton && (
+            <button className="text-white focus:outline-none " onClick={toggleSearch}>
+              🔍
+            </button>
+          )}
+          {showPlusButton && (
+            <button className="text-black ms-1 focus:outline-none" style={{
+              fontFamily: "Rounded Mplus 1c Bold",
+              fontSize: "30px",
+              fontWeight: 700,
+            }}>
+              +
+            </button>
+          )}
         </div>
-        <div className={`flex-grow flex items-center justify-center sm:flex ${isSearchVisible ? 'hidden' : ''}`}>
+        <div className={`flex-grow flex items-center justify-center sm:flex hidden`}>
         <form onSubmit={handleSearchSubmit}>
           <input
             type="text"
@@ -79,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ searchPlaceholder,onSearchChange }) => 
             }}
           />
         </form>
-      </div>
+      </div>  
       </div>
         {isSearchVisible && (
         <div className="container mx-auto my-5 flex items-center justify-center transition-all duration-2000 ease-in-out">

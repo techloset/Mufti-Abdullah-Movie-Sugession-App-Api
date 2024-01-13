@@ -12,20 +12,27 @@ const Search = () => {
   const movies = useSelector(selectAllMovies);
   const [searchQuery, setSearchQuery] = useState('');
   const isLoading = useSelector(selectIsLoading);
+  const [query, setQuery] = useState('');
   
   const location = useLocation();
 
-  // Access the query parameter from the URL
-  const searchParams = new URLSearchParams(location.search);
-  const query = searchParams.get('query') || '';
-
-
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const newQuery = searchParams.get('query') || '';
+    setQuery(newQuery);
+  }, [location.search]);
+  
+  useEffect(() => {
+    dispatch(searchMovies(query) as any); // Dispatch search action
+  }, [dispatch, query]);
+  
   // useEffect(() => {
   //   dispatch(fetchMovies() as any); // Fetch initial movies
   // }, [dispatch]);
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
+    setQuery(query)
     dispatch(searchMovies(query) as any); // Dispatch search action
   };
 
@@ -34,6 +41,8 @@ const Search = () => {
       <Navbar
         searchPlaceholder={'Search for something specific'}
         onSearchChange={handleSearchChange}
+        showSearchButton={true}
+        // showPlusButton={true}
      
       />
          {isLoading && (
@@ -54,20 +63,28 @@ const Search = () => {
     </div>
     
       )}
-      <div className="container mx-auto p-4 h-screen">
-        <div className="grid grid-cols-1 w-full my-4"><h1 className='font-bold'>Search Results For: <span className='text-2xl'>  {query} </span></h1> </div>  
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-          {movies.map((movie: Movie) => (
-            <div key={movie.id} className="col-span-1 md:col-span-1">
-              <MovieCard
-                imageUrl={movie.poster_path}
-                movieId={movie.id}
-                rating={movie.vote_average * 10}
-              />
-            </div>
-          ))}
+ <div className="container mx-auto p-4 ">
+  <div className="grid grid-cols-1 w-full my-4">
+    <h1 className="font-bold">Search Results For: <span className="text-2xl">{query}</span></h1>
+  </div>
+  <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+    {movies.length > 0 ? (
+      movies.map((movie: Movie) => (
+        <div key={movie.id} className="col-span-1 md:col-span-1">
+          <MovieCard
+            imageUrl={movie.poster_path}
+            movieId={movie.id}
+            rating={movie.vote_average * 10}
+          />
         </div>
+      ))
+    ) : (
+      <div className="col-span-full text-center text-xl font-semibold">
+        No movies found for "{query}".
       </div>
+    )}
+  </div>
+</div>
     </>
   );
 };

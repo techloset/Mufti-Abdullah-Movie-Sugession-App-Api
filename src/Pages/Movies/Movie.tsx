@@ -49,9 +49,12 @@ export default function Movie() {
   console.log((movieData as any).original_title)
   return (
     <>
-    <Navbar searchPlaceholder={'Seach Seasons here'} onSearchChange={function (query: string): void {
+    <Navbar   showSearchButton={true}
+        // showPlusButton={true}
+      searchPlaceholder={'Seach Seasons here'} onSearchChange={function (query: string): void {
         throw new Error('Function not implemented.')
-      } }/>
+      } 
+      }/>
 <div className="container mx-auto p-4 ">
   <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
   
@@ -66,7 +69,7 @@ export default function Movie() {
 )}
 
     <div className="col-span flex flex-row justify-end p-2 sm:flex hidden">
-     <button className='bg-cyan-500 hover:bg-cyan-600 flex flex-row rounded-full p-4  bg-gray text-black '>
+     <button className='bg-[#D9D9D9] hover:bg-[#D2D2D2] flex flex-row rounded-full p-4  cursor-pointer text-black '>
      <img src={Icon} alt="" className='md:mx-2 sm:mx-1' /> 
   <span >
      Add to watchlist
@@ -111,14 +114,14 @@ export default function Movie() {
     </div>
   </div>
   </div>
-  <div className="container my-96 md:my-2 mx-auto py-4">
+  <div className="container mt-96  md:my-2  mx-auto py-4">
     <div className="grid grid-cols-2 gap-4 mb-6 ">
       <div className='flex flex-row gap-4'>
         <h1 className='font-bold text-4xl leading-9'>Seasons</h1>
-        <span className='cursor-pointer  flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>1</span>
-        <span className='cursor-pointer  flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>2</span>
-        <span className='cursor-pointer  flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>3</span>
-        <span className='cursor-pointer  flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>4</span>
+        <span className='cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>1</span>
+        <span className='cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>2</span>
+        <span className='cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>3</span>
+        <span className='cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black'>4</span>
       </div>
     </div>
     <div className="grid md:grid-cols-4 grid-cols-2 gap-4 p-2">

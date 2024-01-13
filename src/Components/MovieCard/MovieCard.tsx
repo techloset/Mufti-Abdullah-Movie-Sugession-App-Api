@@ -14,7 +14,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ imageUrl, movieId, rating }) => {
   const handleClick = () => {
     // Navigate to the Movie Page when the card is clicked
     history(`/movie/${movieId}`);
-  };
+  }
 
   return (
     <div

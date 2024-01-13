@@ -27,7 +27,9 @@ export default function Home() {
     <>
    <Navbar
         searchPlaceholder={'Search for something specific'}
-        onSearchChange={handleSearchChange} // Pass the correct function
+        onSearchChange={handleSearchChange}
+        showSearchButton={true}
+        showPlusButton={true}
       />
             {/* Display loading spinner if fetchMovies is pending */}
             {isLoading && (
