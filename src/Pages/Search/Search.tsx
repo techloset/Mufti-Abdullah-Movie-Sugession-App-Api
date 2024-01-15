@@ -2,18 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import MovieCard from '../../Components/MovieCard/MovieCard';
-import { fetchMovies, selectAllMovies, Movie, searchMovies, selectIsLoading } from '../../Redux/Store';
-import Navbar from '../../Components/Navbar/Navbar';
+import MovieCard from '../../Components/movieCard/MovieCard';
+// import { fetchMovies, selectAllMovies, Movie, searchMovies, selectIsLoading } from '../../redux/Store';
+import Navbar from '../../Components/navbar/Navbar';
 import { useLocation } from 'react-router-dom';
+// import { Movie, selectAllMovies, selectIsLoading } from '../../redux/MovieSlice';
+import { searchMoviesFulfilled } from '../../redux/SearchSlice';
+import { Searchs, searchMovies, selectAllSearch, selectIsLoading } from '../../redux/SearchSlice';
 
 const Search = () => {
   const dispatch = useDispatch();
-  const movies = useSelector(selectAllMovies);
+  const searches = useSelector(selectAllSearch) || [];
   const [searchQuery, setSearchQuery] = useState('');
   const isLoading = useSelector(selectIsLoading);
   const [query, setQuery] = useState('');
-  
+
+
   const location = useLocation();
 
   useEffect(() => {
@@ -21,21 +25,39 @@ const Search = () => {
     const newQuery = searchParams.get('query') || '';
     setQuery(newQuery);
   }, [location.search]);
-  
   useEffect(() => {
-    dispatch(searchMovies(query) as any); // Dispatch search action
+    let isMounted = true;
+  
+    // Only fetch movies if there is a valid query
+    if (query) {
+      dispatch(searchMovies(query) as any)
+        .then((data: Searchs[]) => {
+          if (isMounted) {
+            dispatch(searchMoviesFulfilled(data));
+          }
+        })
+        .catch((error: any) => {
+          console.error("Error in searchMovies dispatch:", error);
+        });
+    }
+  
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, query]);
   
-  // useEffect(() => {
-  //   dispatch(fetchMovies() as any); // Fetch initial movies
-  // }, [dispatch]);
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
-    setQuery(query)
-    dispatch(searchMovies(query) as any); // Dispatch search action
+    setQuery(query);
+    dispatch(searchMovies(query) as any)
+      .then((data: any) => {
+        dispatch(searchMoviesFulfilled(data));
+      })
+      .catch((error: any) => {
+        console.error("Error in searchMovies dispatch:", error);
+      });
   };
-
   return (
     <>
       <Navbar
@@ -68,21 +90,26 @@ const Search = () => {
     <h1 className="font-bold">Search Results For: <span className="text-2xl">{query}</span></h1>
   </div>
   <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-    {movies.length > 0 ? (
-      movies.map((movie: Movie) => (
-        <div key={movie.id} className="col-span-1 md:col-span-1">
-          <MovieCard
-            imageUrl={movie.poster_path}
-            movieId={movie.id}
-            rating={movie.vote_average * 10}
-          />
-        </div>
-      ))
-    ) : (
-      <div className="col-span-full text-center text-xl font-semibold">
-        No movies found for "{query}".
-      </div>
-    )}
+  {searches.length > 0 ? (
+  searches.map((search: Searchs) => (
+    <div key={search.id} className="col-span-1 md:col-span-1">
+      <MovieCard
+        imageUrl={search.poster_path}
+        movieId={search.id}
+        rating={search.vote_average * 10}
+      />
+    </div>
+  ))
+) : query ? (
+  <div className="col-span-full text-center text-xl font-semibold">
+    No movies found for "{query}".
+  </div>
+) : (
+  <div className="col-span-full text-center text-xl font-semibold">
+    Enter a search query.
+  </div>
+)}
+
   </div>
 </div>
     </>

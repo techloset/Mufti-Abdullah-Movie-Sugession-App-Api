@@ -2,19 +2,23 @@ import React, { useState } from 'react'
 // Import statements...
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Icon from "../../Assets/icons/icon _bookmark_.png"
-import SeasonCard from '../../Components/SeasonCard/SeasonCard'
-import Navbar from '../../Components/Navbar/Navbar'
-import { addToWatchList, fetchMovies, fetchSeries, selectAllMovies, selectIsLoading } from '../../Redux/Store';
+import Icon from "../../assets/icons/icon _bookmark_.png"
+import SeasonCard from '../../Components/seasonCard/SeasonCard'
+import Navbar from '../../Components/navbar/Navbar'
+// import { addToWatchList, fetchMovies, fetchSeries, selectAllMovies, selectIsLoading } from '../../redux/Store';
 import { useParams } from 'react-router-dom';
+import { fetchMovies, selectAllMovies, selectIsLoading } from '../../redux/MovieSlice';
+import { fetchSeries, selectAllSeasons } from '../../redux/SeasonsSlice';
+import { selectAllSearch } from '../../redux/SearchSlice';
 
 export default function Movie() {
   const { movieId } = useParams();
-  console.log(movieId)
+  // console.log(movieId)
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const series = useSelector(selectAllMovies);
+  const series = useSelector(selectAllSeasons);
   const movies = useSelector(selectAllMovies);
+  const searchs = useSelector(selectAllSearch);
   const [movieData, setMovieData] = useState(null);
   
   useEffect(() => {
@@ -26,13 +30,21 @@ export default function Movie() {
 
   useEffect(() => {
     const matchedMovie = movies.find(movie => movie.id.toString() === movieId);
+    const matchedSeries = series.find(series => series.id.toString() === movieId);
+    const matchedSearch = searchs.find(search => search.id.toString() === movieId);
 
     if (matchedMovie) {
       setMovieData(matchedMovie);
     }
-  }, [movies, movieId]);
+    if(matchedSeries){
+      setMovieData(matchedSeries)
+    }
+    if(matchedSearch){
+      setMovieData(matchedSearch)
+    }
+  }, [movies,series,,searchs, movieId]);
   if (movieData === null) {
-    return <div>Loading...</div>;
+    return <div>Id Data Not Found</div>;
   }
   
   if(fetchMovies.pending("peding")){
@@ -46,13 +58,18 @@ export default function Movie() {
 </div>
 
   }
-  console.log("Movie Data:", movieData);
-  console.log((movieData as any).original_title)
-  const handleAddToWatchList = () => {
-    // You can dispatch the addToWatchList action here
-    dispatch(addToWatchList()as any);
+  // console.log("Movie Data:", movieData);
+  // console.log((movieData as any).original_title)
 
-  };
+
+
+// i commit this because it can not authorized api 
+
+
+// const handleAddToWatchList = () => {
+  //   dispatch(addToWatchList()as any);
+
+  // };
   return (
     <>
     <Navbar   showSearchButton={true}
@@ -77,7 +94,7 @@ export default function Movie() {
     <div className="col-span flex flex-row justify-end p-2 sm:flex hidden">
     <button
       className='bg-[#D9D9D9] hover:bg-[#D2D2D2] flex flex-row rounded-full p-4 cursor-pointer text-black'
-      onClick={handleAddToWatchList}
+      // onClick={handleAddToWatchList}
       disabled={isLoading} 
     >
       <img src={Icon} alt="" className='md:mx-2 sm:mx-1' />
@@ -101,15 +118,15 @@ export default function Movie() {
       <span className='rounded-full border-2 border-black border-solid px-3 py-1 me-2 '>Action</span>
       <span className='rounded-full border-2 border-black border-solid px-3 py-1 ms-2'>Sci Fiction</span>
       <p className='color-black font-bold text-l mt-4 mb-10'>
-       {(movieData as any).overview
+       {(movieData as any).overview.slice(0,300)
      }
         </p>
     <h3>IBM Rating</h3>
-    <span>
+    <span className='text-xl'>
     ⭐
-       {(movieData as any).vote_average
+       {Math.round((movieData as any).vote_average)
      }
-      </span>
+      </span> <span>/10</span>
     </div>
 </div>
 <div className="grid grid-cols-1 w-full  md:static relative ">

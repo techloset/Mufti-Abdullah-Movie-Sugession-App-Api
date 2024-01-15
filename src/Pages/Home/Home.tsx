@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import MovieCard from "../../Components/MovieCard/MovieCard";
-import { fetchMovies, searchMovies, selectAllMovies, selectIsLoading } from "../../Redux/Store";
-import Navbar from "../../Components/Navbar/Navbar";
+import MovieCard from "../../Components/movieCard/MovieCard";
+// import { fetchMovies, searchMovies, selectAllMovies, selectIsLoading } from "../../redux/Store";
+import Navbar from "../../Components/navbar/Navbar";
+// import { fetchMovies } from "../../redux/MovieSlice";
+import { fetchMovies, selectAllMovies, selectIsLoading } from "../../redux/MovieSlice";
+
+import { searchMovies } from "../../redux/SearchSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
