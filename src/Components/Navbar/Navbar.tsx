@@ -94,7 +94,7 @@ const Navbar: React.FC<NavbarProps> = ({ searchPlaceholder,onSearchChange ,  sho
       </div>  
       </div>
         {isSearchVisible && (
-        <div className="container mx-auto my-5 flex items-center justify-center transition-all duration-2000 ease-in-out">
+        <div className="container mx-auto my-5 sm:hidden block flex items-center justify-center transition-all duration-2000 ease-in-out">
           <form onSubmit={handleSearchSubmit}>
             <input
               type="text"

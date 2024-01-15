@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Icon from "../../Assets/icons/icon _bookmark_.png"
 import SeasonCard from '../../Components/SeasonCard/SeasonCard'
 import Navbar from '../../Components/Navbar/Navbar'
-import { fetchMovies, fetchSeries, selectAllMovies } from '../../Redux/Store';
+import { addToWatchList, fetchMovies, fetchSeries, selectAllMovies, selectIsLoading } from '../../Redux/Store';
 import { useParams } from 'react-router-dom';
 
 export default function Movie() {
   const { movieId } = useParams();
   console.log(movieId)
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   const series = useSelector(selectAllMovies);
   const movies = useSelector(selectAllMovies);
   const [movieData, setMovieData] = useState(null);
@@ -47,6 +48,11 @@ export default function Movie() {
   }
   console.log("Movie Data:", movieData);
   console.log((movieData as any).original_title)
+  const handleAddToWatchList = () => {
+    // You can dispatch the addToWatchList action here
+    dispatch(addToWatchList()as any);
+
+  };
   return (
     <>
     <Navbar   showSearchButton={true}
@@ -69,12 +75,14 @@ export default function Movie() {
 )}
 
     <div className="col-span flex flex-row justify-end p-2 sm:flex hidden">
-     <button className='bg-[#D9D9D9] hover:bg-[#D2D2D2] flex flex-row rounded-full p-4  cursor-pointer text-black '>
-     <img src={Icon} alt="" className='md:mx-2 sm:mx-1' /> 
-  <span >
-     Add to watchlist
-    </span>
-     </button>
+    <button
+      className='bg-[#D9D9D9] hover:bg-[#D2D2D2] flex flex-row rounded-full p-4 cursor-pointer text-black'
+      onClick={handleAddToWatchList}
+      disabled={isLoading} 
+    >
+      <img src={Icon} alt="" className='md:mx-2 sm:mx-1' />
+      <span>Add to watchlist</span>
+    </button>
     </div>
   </div>
   {/* description section */}

@@ -6,6 +6,7 @@ interface MovieState {
   movies: any[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  watchlist: any[],
 }
 
 
@@ -17,9 +18,11 @@ export interface Movie {
 
 const initialState: MovieState = {
   movies: [],
+  watchlist: [],
   status: 'idle',
   error: null,
 };
+
 export const searchMovies = createAsyncThunk('movies/searchMovies', async (query: string) => {
   try {
     const response = await axios.get(
@@ -72,6 +75,23 @@ export const fetchSeries = createAsyncThunk('movies/fetchSeries', async () => {
     throw error;
   }
 });
+export const addToWatchList = createAsyncThunk('watchlist/addToWatchList', async () => {
+  try {
+    const response = await axios.post(
+      'https://api.themoviedb.org/3/account/20911504/watchlist',
+      {
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer a0c604a4e137a6b5e657de3dc0442780',
+        },
+      }
+    );
+    console.log(response.data.results.status_message)
+    return response.data.results;
+  } catch (error) {
+    throw error;
+  }
+});
 
 const moviesSlice = createSlice({
   name: 'movies',
@@ -101,7 +121,25 @@ const moviesSlice = createSlice({
       });
   },
 });
-
+const watchListSlice = createSlice({
+  name: 'watchList',
+  initialState, // Change to initialState instead of initialStateWatch
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(addToWatchList.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addToWatchList.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.watchlist = action.payload; // Update to watchlist
+      })
+      .addCase(addToWatchList.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = (action.error.message ?? null) as string | null;
+      });
+  },
+});
 const seasonSlice = createSlice({
   name: 'seasons',
   initialState,
@@ -154,6 +192,7 @@ export const { reducer } = moviesSlice;
 const store = configureStore({
   reducer: {
     movies: reducer,
+    watchList: watchListSlice.reducer
   },
 });
 
