@@ -6,10 +6,9 @@ import Routese from './routes/Routese';
 function App() {
   return (
    <>
-     {/* <Navbar searchPlaceholder="🔍Search for something specific"/> */}
-       {/* <Home/> */}
+   
        <Routese/>
-        {/* <Footer/> */}
+       
    </>
   );
 }
