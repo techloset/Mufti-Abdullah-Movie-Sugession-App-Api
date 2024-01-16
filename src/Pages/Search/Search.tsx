@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import MovieCard from '../../Components/movieCard/MovieCard';
+import MovieCard from '../../components/movieCard/MovieCard';
 // import { fetchMovies, selectAllMovies, Movie, searchMovies, selectIsLoading } from '../../redux/Store';
-import Navbar from '../../Components/navbar/Navbar';
+
 import { useLocation } from 'react-router-dom';
 // import { Movie, selectAllMovies, selectIsLoading } from '../../redux/MovieSlice';
 import { searchMoviesFulfilled } from '../../redux/SearchSlice';
 import { Searchs, searchMovies, selectAllSearch, selectIsLoading } from '../../redux/SearchSlice';
+import Navbar from '../../components/navbar/Navbar';
 
 const Search = () => {
   const dispatch = useDispatch();

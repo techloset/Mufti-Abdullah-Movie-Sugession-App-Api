@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import MovieCard from "../../Components/movieCard/MovieCard";
+import MovieCard from "../../components/movieCard/MovieCard";
 // import { fetchMovies, searchMovies, selectAllMovies, selectIsLoading } from "../../redux/Store";
-import Navbar from "../../Components/navbar/Navbar";
+
 // import { fetchMovies } from "../../redux/MovieSlice";
 import { fetchMovies, selectAllMovies, selectIsLoading } from "../../redux/MovieSlice";
 
 import { searchMovies } from "../../redux/SearchSlice";
+import Navbar from "../../components/navbar/Navbar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export default function Home() {
   return (
     <>
    <Navbar
-        searchPlaceholder={'Search for something specific'}
+        searchPlaceholder={'🔍 Search a movie or a series'}
         onSearchChange={handleSearchChange}
         showSearchButton={true}
         showPlusButton={true}
@@ -54,11 +55,11 @@ export default function Home() {
     </div>
     
       )}
-      <div className="container mx-auto flex flex-col h-screen">
+      <div className="container mx-auto flex flex-col ">
         <div className="grid grid-cols-12 gap-4">
           {/* Trending Section */}
           <div className="col-span-12 sm:col-span-4 md:me-5">
-            <h1 className="py-3 font-bold">Popular Movies</h1>
+            <h1 className="py-3 mb-4 mt-7 text-[20px] font-bold">Popular Movies</h1>
             <div className="grid grid-cols-2 gap-4">
               {movies.slice(10, 14).map((movie) => (
                 <div key={movie.id} className="md:col-span-1 sm:col-span-2">
@@ -73,7 +74,7 @@ export default function Home() {
           </div>
           {/* Latest Section */}
           <div className="col-span-12 sm:col-span-8 md:ms-5">
-            <h1 className="py-3 font-bold">Trending</h1>
+            <h1 className="py-3 mb-4 mt-7 text-[20px] font-bold">Trending</h1>
             <div className="grid grid-cols-12 gap-4">
               {movies.slice(0, 8).map((movie) => (
                 <div key={movie.id} className="col-span-6 sm:col-span-3">
@@ -91,7 +92,7 @@ export default function Home() {
 
       {/* Popular Released Section */}
       <div className="container mx-auto mb-4 pt-4">
-        <h1 className="py-3 font-bold">Popular Released</h1>
+        <h1 className="py-3 mb-4 mt-7 text-[20px] font-bold">Popular Released</h1>
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           {movies.map((movie) => (
             <div key={movie.id} className="col-span-1 md:col-span-1">

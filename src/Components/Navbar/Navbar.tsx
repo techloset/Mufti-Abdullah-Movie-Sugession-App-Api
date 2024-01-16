@@ -84,7 +84,7 @@ const Navbar: React.FC<NavbarProps> = ({ searchPlaceholder,onSearchChange ,  sho
             placeholder={searchPlaceholder}
             value={searchQuery}
             onChange={handleSearchChange}
-            className="px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 sm:w-full md:w-96 lg:w-[40rem]"
+            className="px-4 py-2 rounded-md focus:outline-none text-center   focus:ring focus:border-blue-300 sm:w-full md:w-96 lg:w-[40rem]"
             style={{
               background: '#D9D9D9',
               borderRadius: '30px',

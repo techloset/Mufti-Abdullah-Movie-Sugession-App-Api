@@ -1,6 +1,5 @@
-import React from 'react';
+
 import './App.css';
-import Navbar from './Components/navbar/Navbar';
 import Routese from './routes/Routese';
 // import Footer from './Components/Footer/Footer';
 

@@ -3,13 +3,15 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from "../../assets/icons/icon _bookmark_.png"
-import SeasonCard from '../../Components/seasonCard/SeasonCard'
-import Navbar from '../../Components/navbar/Navbar'
+import SeasonCard from '../../components/seasonCard/SeasonCard'
+
 // import { addToWatchList, fetchMovies, fetchSeries, selectAllMovies, selectIsLoading } from '../../redux/Store';
 import { useParams } from 'react-router-dom';
 import { fetchMovies, selectAllMovies, selectIsLoading } from '../../redux/MovieSlice';
 import { fetchSeries, selectAllSeasons } from '../../redux/SeasonsSlice';
 import { selectAllSearch } from '../../redux/SearchSlice';
+import Navbar from '../../components/navbar/Navbar';
+
 
 export default function Movie() {
   const { movieId } = useParams();
@@ -74,7 +76,8 @@ export default function Movie() {
     <>
     <Navbar   showSearchButton={true}
         // showPlusButton={true}
-      searchPlaceholder={'Seach Seasons here'} onSearchChange={function (query: string): void {
+      searchPlaceholder={'Seach Seasons here'}
+       onSearchChange={function (query: string): void {
         throw new Error('Function not implemented.')
       } 
       }/>
@@ -82,8 +85,8 @@ export default function Movie() {
   <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
   
   {movieData ? (
-  <div className="col-span font-bold text-4xl leading-9 sm:w-full">
-    {(movieData as any).original_title}
+  <div className="col-span  sm:w-full">
+ <p className=' font-bold text-4xl leading-9 '>    {(movieData as any).original_title}</p>
   </div>
 ) : (
   <div className="col-span font-bold text-4xl leading-9 sm:w-full">

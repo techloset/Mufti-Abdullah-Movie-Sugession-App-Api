@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Home from '../Pages/home/Home'
-import Search from '../Pages/search/Search'
-import Movie from '../Pages/movies/Movie'
+import Home from '../pages/home/Home'
+import Search from '../pages/search/Search'
+import Movie from '../pages/movies/Movie'
 
 function Routese() {
   return (

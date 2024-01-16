@@ -27,7 +27,7 @@ export const searchMovies = createAsyncThunk('search/searchMovies', async (query
         },
       }
     );
-    console.log("response.data.results",response.data.results)
+    // console.log("response.data.results",response.data.results)
     return response.data.results;
   } catch (error) {
     throw error;
