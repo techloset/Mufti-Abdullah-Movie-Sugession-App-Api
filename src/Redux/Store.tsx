@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
   seasons: seasonSlice.reducer,
 });
 
-const store = configureStore({
+const Store = configureStore({
   reducer: rootReducer,
 });
 
-export default store;
+export default Store;
