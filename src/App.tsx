@@ -1,16 +1,10 @@
-
 import './App.css';
-import Routese from './routes/Routese';
-// import Footer from './Components/Footer/Footer';
+import Routes from './routes/Routes';
 
 function App() {
   return (
-   <>
-   
-       <Routese/>
-       
-   </>
-  );
+       <Routes/>
+      );
 }
 
 export default App;
