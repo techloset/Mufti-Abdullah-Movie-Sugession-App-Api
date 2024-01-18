@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MovieCard from "../../components/movieCard/MovieCard";
 import loader from "../../assets/loader/loader.svg";
 import { useLocation } from "react-router-dom";
-import { searchMoviesFulfilled } from "../../redux/SearchSlice";
+// import { searchMoviesFulfilled } from "../../redux/SearchSlice";
 import {
   Searchs,
   searchMovies,
@@ -11,9 +11,12 @@ import {
   selectIsLoading,
 } from "../../redux/SearchSlice";
 import Navbar from "../../components/navbar/Navbar";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { RootState } from "../../redux/Store";
 
 const Search = () => {
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
+
   const searches = useSelector(selectAllSearch) || [];
   const [searchQuery, setSearchQuery] = useState("");
   const isLoading = useSelector(selectIsLoading);
@@ -29,13 +32,13 @@ const Search = () => {
   useEffect(() => {
     let isMounted = true;
     if (query) {
-      dispatch(searchMovies(query) as any)
-        .then((data: Searchs[]) => {
+      dispatch(searchMovies(query))
+        .then((data) => {
           if (isMounted) {
             dispatch(searchMoviesFulfilled(data));
           }
         })
-        .catch((error: any) => {
+        .catch((error) => {
           console.error("Error in searchMovies dispatch:", error);
         });
     }
@@ -48,11 +51,11 @@ const Search = () => {
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
     setQuery(query);
-    dispatch(searchMovies(query) as any)
-      .then((data: any) => {
+    dispatch(searchMovies(query))
+      .then((data) => {
         dispatch(searchMoviesFulfilled(data));
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error("Error in searchMovies dispatch:", error);
       });
   };
@@ -112,3 +115,7 @@ const Search = () => {
 };
 
 export default Search;
+function searchMoviesFulfilled(data: import("@reduxjs/toolkit").PayloadAction<any, string, { arg: string; requestId: string; requestStatus: "fulfilled"; }, never> | import("@reduxjs/toolkit").PayloadAction<unknown, string, { arg: string; requestId: string; requestStatus: "rejected"; aborted: boolean; condition: boolean; } & ({ rejectedWithValue: true; } | ({ rejectedWithValue: false; } & {})), import("@reduxjs/toolkit").SerializedError>): any {
+  throw new Error("Function not implemented.");
+}
+

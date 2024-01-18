@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import instance from "../helper/Instance";
 import { Movie } from "./MovieSlice";
 
@@ -7,8 +7,9 @@ export interface Searchs extends Movie {
   poster_path: string;
   vote_average: number;
 }
-interface SearchState {
-  movies: [];
+
+export interface SearchState {
+  movies: Searchs[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -34,7 +35,12 @@ const searchSlice = createSlice({
     status: "idle",
     error: null,
   } as SearchState,
-  reducers: {},
+  reducers: {
+    setSearches: (state, action: PayloadAction<Searchs[]>) => {
+      state.movies = action.payload;
+      state.status = "succeeded";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(searchMovies.pending, (state) => {
@@ -51,8 +57,9 @@ const searchSlice = createSlice({
   },
 });
 
-export const { reducer: moviesReducer, actions } = searchSlice;
-export const { searchMoviesFulfilled }: any = actions;
+export const { reducer: searchReducer, actions } = searchSlice;
+export const { setSearches } = actions;
+
 export const selectAllSearch = (state: { search: SearchState }) =>
   state.search.movies;
 export const selectIsLoading = (state: { search: SearchState }) =>

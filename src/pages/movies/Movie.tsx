@@ -13,10 +13,12 @@ import {
 import { fetchSeries, selectAllSeasons } from "../../redux/SeasonsSlice";
 import { selectAllSearch } from "../../redux/SearchSlice";
 import Navbar from "../../components/navbar/Navbar";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { RootState } from "../../redux/Store";
 
 export default function Movie() {
   const { movieId } = useParams();
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const movies: Movie[] = useSelector(selectAllMovies);
   const seasons: Season[] = useSelector(selectAllSeasons);
@@ -55,10 +57,10 @@ export default function Movie() {
   }
 
   useEffect(() => {
-    dispatch(fetchMovies() as any);
+    dispatch(fetchMovies());
   }, [dispatch]);
   useEffect(() => {
-    dispatch(fetchSeries() as any);
+    dispatch(fetchSeries());
   }, [dispatch]);
 
   useEffect(() => {

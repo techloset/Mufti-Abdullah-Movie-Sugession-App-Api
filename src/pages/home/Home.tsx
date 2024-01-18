@@ -10,20 +10,23 @@ import {
 } from "../../redux/MovieSlice";
 import { searchMovies } from "../../redux/SearchSlice";
 import Navbar from "../../components/navbar/Navbar";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { AnyAction } from 'redux';
+import { RootState } from "../../redux/Store";
 
 export default function Home() {
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
   const movies: Movie[] = useSelector(selectAllMovies);
-  const [searchQuery, setSearchQuery] = useState("");
   const isLoading = useSelector(selectIsLoading);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    dispatch(fetchMovies() as any);
+    dispatch(fetchMovies());
   }, [dispatch]);
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
-    dispatch(searchMovies(query) as any);
+    dispatch(searchMovies(query));
   };
 
   return (

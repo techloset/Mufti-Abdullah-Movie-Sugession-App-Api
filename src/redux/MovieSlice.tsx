@@ -2,12 +2,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../helper/Instance";
 
 export interface Movie {
-  id: number;
-  poster_path: string;
-  vote_average: number;
+ id: number;
+    vote_average: number;
+    poster_path: string;
+    name: string;
+    original_title: string;
+    backdrop_path: string;
+    overview: string;
 }
+
 interface MovieState {
-  movies: [];
+  movies: Movie[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -20,6 +25,7 @@ export const fetchMovies = createAsyncThunk("movies/fetchMovies", async () => {
     throw error;
   }
 });
+
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {
@@ -46,6 +52,7 @@ const moviesSlice = createSlice({
 
 export const selectAllMovies = (state: { movies: MovieState }) =>
   state.movies.movies;
+
 export const selectIsLoading = (state: { movies: MovieState }) =>
   state.movies.status === "loading";
 
