@@ -17,7 +17,7 @@ const SeasonCard: React.FC<SeasonCardProps> = ({
   return (
     <>
       <div
-        className="relative rounded-tl-lg rounded-tr-lg cursor-pointer overflow-hidden transition-transform transform-gpu mb-5 hover:scale-105"
+        className="relative rounded-[1.5rem]  cursor-pointer overflow-hidden transition-transform transform-gpu mb-5 hover:scale-105 sm:h-[202px] h-auto sm:w-[305px] w-[w-[305px]]"
         style={{ animationDuration: "0ms" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -25,8 +25,9 @@ const SeasonCard: React.FC<SeasonCardProps> = ({
         <img
           src={`https://image.tmdb.org/t/p/original/${imageUrl}`}
           alt="Movie Poster"
-          className="w-full h-full object-cover"
+          className="w-full h-2/3 object-cover"
         />
+<h3 className="font-bold text-[20px] leading-9 mt-2">{name.slice(0,30)+".."}</h3>
 
         <div
           className={`absolute top-0 left-0 flex items-center space-x-1 p-2 bg-black bg-opacity-75 transition-opacity duration-300 ${
@@ -40,8 +41,8 @@ const SeasonCard: React.FC<SeasonCardProps> = ({
             ⭐ {Math.round(rating)}
           </span>
         </div>
-        <h3 className="font-bold text-4l leading-9 mt-2">{name}</h3>
       </div>
+
     </>
   );
 };

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import MovieCard from "../../components/movieCard/MovieCard";
 import loader from "../../assets/loader/loader.svg";
 import { useLocation } from "react-router-dom";
-// import { searchMoviesFulfilled } from "../../redux/SearchSlice";
 import {
   Searchs,
   searchMovies,
@@ -62,7 +61,7 @@ const Search = () => {
   return (
     <>
       <Navbar
-        searchPlaceholder={"Search for something specific"}
+        searchPlaceholder={"Search Movies and Series here"}
         onSearchChange={handleSearchChange}
         showSearchButton={true}
       />
@@ -82,16 +81,16 @@ const Search = () => {
           </div>
         </div>
       )}
-      <div className="container mx-auto p-4 ">
+      <div className="container mx-auto p-4 " style={{fontFamily:"Roboto"}}>
         <div className="grid grid-cols-1 w-full my-4">
-          <h1 className="font-bold">
-            Search Results For: <span className="text-2xl">{query}</span>
+          <h1 className="font-bold text-[15px]">
+            Search Results For: <span className="text-[20px] text-[#7D7D7D]">{query}</span>
           </h1>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-6 sm:w-full w-[375px] gap-4">
           {searches.length > 0 ? (
             searches.map((search: Searchs) => (
-              <div key={search.id} className="col-span-1 md:col-span-1">
+              <div key={search.id} className="col-span-1 md:col-span-1 sm:w-[197px] w-[158px]">
                 <MovieCard
                   imageUrl={search.poster_path}
                   movieId={search.id}

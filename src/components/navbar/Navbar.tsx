@@ -62,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({
             Tracker
           </Link>
         </div>
-        <div className="flex-grow flex items-center justify-center sm:hidden">
+        <div className="flex-grow flex items-center justify-end sm:hidden">
           {showSearchButton && (
             <button
               className="text-white focus:outline-none "
@@ -93,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="px-4 py-2 rounded-md focus:outline-none text-center   focus:ring focus:border-blue-300 sm:w-full md:w-96 lg:w-[40rem]"
+              className="px-4 py-2 rounded-md focus:outline-none text-center   focus:ring focus:border-blue-300 sm:w-full md:w-[630px] lg:w-[40rem] h-[57px]"
               style={{
                 background: "#D9D9D9",
                 borderRadius: "30px",
@@ -110,7 +110,7 @@ const Navbar: React.FC<NavbarProps> = ({
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 sm:w-full md:w-96 lg:w-[40rem] responsive-search-input"
+              className="px-4 ms-8 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 w-[300px] responsive-search-input"
               style={{
                 background: "#D9D9D9",
                 borderRadius: "30px",

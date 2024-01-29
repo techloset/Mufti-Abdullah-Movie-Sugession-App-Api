@@ -108,11 +108,11 @@ export default function Movie() {
           throw new Error("Function not implemented.");
         }}
       />
-      <div className="container mx-auto p-4 ">
-        <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+      <div className="container mx-auto p-4" style={{fontFamily:"Roboto"}}>
+        <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-1">
           {movieData ? (
             <div className="col-span  sm:w-full">
-              <p className=" font-bold text-4xl leading-9 ">
+              <p className=" font-bold text-[40px] leading-9 my-3">
                 {" "}
                 {movieData.original_title}
               </p>
@@ -123,77 +123,93 @@ export default function Movie() {
             </div>
           )}
 
-          <div className="col-span flex flex-row justify-end p-2 sm:flex hidden">
+          <div className="col-span  flex-row justify-end p-2 sm:flex hidden gap-x-6">
             <button
               className="bg-[#D9D9D9] hover:bg-[#D2D2D2] flex flex-row rounded-full p-4 cursor-pointer text-black"
               disabled={isLoading}
             >
-              <img src={Icon} alt="" className="md:mx-2 sm:mx-1" />
+              <img src={Icon} alt="" className="md:mx-2 sm:mx-1 text-[15px]" />
               <span>Add to watchlist</span>
             </button>
           </div>
         </div>
         {/* description section */}
         <div className="container mx-auto py-4">
-          <div className="grid lg:grid-cols-2  sm:grid-cols-1 gap-3 flex flex-col justify-between">
-            <div className="grid md:grid-cols-2 sm:grid-cols-1  z-10 md:static absolute gap-5">
-              <div className="my-3 sm:w-full  w-[100px] flex justify-center relative md:top-0 md:left-0 top-16 left-8">
-                <img
-                  className="sm:w-[49px] md:w-full lg:w-[196px] rounded-[2rem]"
-                  src={`https://image.tmdb.org/t/p/original/${movieData.poster_path}`}
-                  alt=""
-                />
-              </div>
-
-              <div className="me-2 w-[500] my-5 ps-0 relative md:top-0 md:left-0 top-16 left-1">
-                <span className="rounded-full border-2 border-black border-solid px-3 py-1 me-2 ">
-                  Action
-                </span>
-                <span className="rounded-full border-2 border-black border-solid px-3 py-1 ms-2">
-                  Sci Fiction
-                </span>
-                <p className="color-black font-bold text-l mt-4 mb-10">
-                  {movieData.overview.slice(0, 300)}
-                </p>
-                <h3>IBM Rating</h3>
-                <span className="text-xl">
-                  ⭐{Math.round(movieData.vote_average)}
-                </span>{" "}
-                <span>/10</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 w-full  md:static relative ">
-              <div className="mx-3 my-5 w-full">
-                <img
-                  className="rounded-[20px] h-full"
-                  src={`https://image.tmdb.org/t/p/original/${movieData.backdrop_path}`}
-                  width="700"
-                  height="500"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+  <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-2">
+    {/* Container for Poster Image */}
+    <div className="flex sm:flex-row flex-col z-10 relative">
+      <div className="sm:w-[196px]  w-[98px] my-auto relative md:top-0 md:left-0 top-16 left-8">
+        <img
+          className="sm:w-[98px] md:w-full lg:w-[196px] rounded-[2rem]"
+          src={`https://image.tmdb.org/t/p/original/${movieData.poster_path}`}
+          alt=""
+        />
       </div>
-      <div className="container mt-96  md:my-2  mx-auto py-4">
+
+      <div className="my-5 sm:w-[413px] w-[334px] sm:ps-5 ps-0 flex flex-col pe-2 relative md:top-0 md:left-0 top-16 left-2">
+        <div className="flex flex-row text-[18px]">
+          <span className="rounded-full border-2 border-black border-solid px-3 py-1 me-2">
+            Action
+          </span>
+          <span className="rounded-full border-2 border-black border-solid px-3 py-1 ms-2">
+            Sci Fiction
+          </span>
+        </div>
+        <p className="color-black font-bold text-[18px] text-wrap w-auto mt-4 mb-10">
+          {movieData.overview.slice(0, 300)}
+        </p>
+        <h3 className="text-[18px]">IBM Rating</h3>
+        <span className="text-[15px]">
+          ⭐{Math.round(movieData.vote_average)}
+        /
+        <span  className="text-[12px]">10</span>
+        </span>
+      </div>
+    </div>
+    <div className="grid grid-cols-1 w-auto md:static relative top-[-570px]">
+      <div className="ms-auto my-5 h-auto w-auto">
+        <img
+          className="rounded-[20px] md:w-full lg:w-[521px] sm:w-[334] h-full"
+          src={`https://image.tmdb.org/t/p/original/${movieData.backdrop_path}`}
+          width="700"
+          height="500"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <div className="container   md:my-2  mx-auto py-4">
         <div className="grid grid-cols-2 gap-4 mb-6 ">
           <div className="flex flex-row gap-4">
-            <h1 className="font-bold text-4xl leading-9">Seasons</h1>
-            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black">
+            <h1 className="font-bold text-[30px] leading-9 my-auto mx-2">Seasons</h1>
+            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
               1
             </span>
-            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black">
+            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
               2
             </span>
-            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black">
+            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
               3
             </span>
-            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-full p-2  bg-[#D9D9D9] text-black">
+            <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
               4
             </span>
           </div>
         </div>
-        <div className="grid md:grid-cols-4 grid-cols-2 gap-4 p-2">
+        <div className="grid md:grid-cols-4 grid-cols-2 sm:ms-0 ms-5 gap-4 p-2">
           {seasons.map((season) => (
             <div key={season.id}>
               <SeasonCard

@@ -17,7 +17,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ imageUrl, movieId, rating }) => {
 
   return (
     <div
-      className="relative rounded-md cursor-pointer overflow-hidden transition-transform transform-gpu hover:scale-105"
+      className="relative rounded-md cursor-pointer overflow-hidden transition-transform transform-gpu hover:scale-105 sm:w-[177px] sm:h-[263] w-[158px] h-[234px]"
       style={{ animationDuration: "0ms" }}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
