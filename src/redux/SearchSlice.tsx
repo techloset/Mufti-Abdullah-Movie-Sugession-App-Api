@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import instance from "../helper/Instance";
-import { Movie } from "./MovieSlice";
+import instance from "../utilites/Instance";
+import { CardsType } from "../constants/Types";
 
-export interface Searchs extends Movie {
+export interface Searchs extends CardsType {
   id: number;
   poster_path: string;
   vote_average: number;
@@ -22,8 +22,8 @@ export const searchMovies = createAsyncThunk(
         `search/movie?query=${query}&language=en-US`
       );
       return response.data.results;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      throw new Error(error?.message ?? "Fetch movies error");
     }
   }
 );
@@ -62,7 +62,7 @@ export const { setSearches } = actions;
 
 export const selectAllSearch = (state: { search: SearchState }) =>
   state.search.movies;
-export const selectIsLoading = (state: { search: SearchState }) =>
+export const selectIsLoadingSearch = (state: { search: SearchState }) =>
   state.search.status === "loading";
 
 export default searchSlice;

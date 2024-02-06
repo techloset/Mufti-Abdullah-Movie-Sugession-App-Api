@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CardProps } from "../../constants/Types";
 
-export type MovieCardProps = {
-  imageUrl: string;
-  movieId: number;
-  rating: number;
-};
-
-const MovieCard: React.FC<MovieCardProps> = ({ imageUrl, movieId, rating }) => {
+const MovieCard: React.FC<CardProps> = ({ imageUrl, movieId, rating }) => {
   const history = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -18,7 +13,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ imageUrl, movieId, rating }) => {
   return (
     <div
       className="relative rounded-md cursor-pointer overflow-hidden transition-transform transform-gpu hover:scale-105 sm:w-[177px] sm:h-[263] w-[158px] h-[234px]"
-      style={{ animationDuration: "0ms" }}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -33,10 +27,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ imageUrl, movieId, rating }) => {
           isHovered ? "opacity-100" : "opacity-0"
         }`}
       >
-        <span
-          className="text-white font-FONTSPRING-DEMO-Caros-Bold text-15px font-bold leading-9 letter-spacing-0"
-          style={{ textAlign: "left" }}
-        >
+        <span className="text-white font-FONTSPRING-DEMO-Caros-Bold text-15px font-bold leading-9 letter-spacing-0 text-[white]">
           ⭐ {Math.round(rating)}
         </span>
       </div>

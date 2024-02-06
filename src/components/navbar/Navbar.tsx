@@ -47,15 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <nav className="p-4 w-full">
       <div className="container mx-auto flex items-center justify-between">
-        <div
-          className="text-black"
-          style={{
-            fontFamily: "FONTSPRING DEMO - Caros Bold",
-            fontSize: "35px",
-            fontWeight: 600,
-            lineHeight: "30px",
-          }}
-        >
+        <div className="text-black font-roboto text-[35px] font-semibold leading-[30px]">
           <Link to="/">
             The <br />
             Movie <br />
@@ -65,21 +57,14 @@ const Navbar: React.FC<NavbarProps> = ({
         <div className="flex-grow flex items-center justify-end sm:hidden">
           {showSearchButton && (
             <button
-              className="text-white focus:outline-none "
+              className="text-white focus:outline-none text-[20px] font-bold"
               onClick={toggleSearch}
             >
               🔍
             </button>
           )}
           {showPlusButton && (
-            <button
-              className="text-black ms-1 focus:outline-none"
-              style={{
-                fontFamily: "Rounded Mplus 1c Bold",
-                fontSize: "30px",
-                fontWeight: 700,
-              }}
-            >
+            <button className="text-black ms-1 focus:outline-none text-[30px] font-bold">
               +
             </button>
           )}
@@ -93,11 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="px-4 py-2 rounded-md focus:outline-none text-center   focus:ring focus:border-blue-300 sm:w-full md:w-[630px] lg:w-[40rem] h-[57px]"
-              style={{
-                background: "#D9D9D9",
-                borderRadius: "30px",
-              }}
+              className="px-4 py-2 rounded-[30px] focus:outline-none text-center bg-input  focus:ring focus:border-blue-300 sm:w-full md:w-[630px] lg:w-[40rem] h-[57px]"
             />
           </form>
         </div>
@@ -110,11 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="px-4 ms-8 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 w-[300px] responsive-search-input"
-              style={{
-                background: "#D9D9D9",
-                borderRadius: "30px",
-              }}
+              className="px-4 py-2 rounded-[30px] focus:outline-none text-center bg-input  focus:ring focus:border-blue-300 sm:w-full md:w-[630px] lg:w-[40rem] h-[57px]"
             />
           </form>
         </div>

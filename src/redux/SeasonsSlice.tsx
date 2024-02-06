@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import instance from "../helper/Instance";
+import instance from "../utilites/Instance";
 
 interface SeasonState {
   seasons: [];
@@ -11,8 +11,8 @@ export const fetchSeries = createAsyncThunk("series/fetchSeries", async () => {
   try {
     const response = await instance.get("tv/popular?language=en-US&page=1");
     return response.data.results;
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    throw new Error(error?.message ?? "Fetch movies error");
   }
 });
 
@@ -41,7 +41,7 @@ const seasonSlice = createSlice({
 });
 export const selectAllSeasons = (state: { seasons: SeasonState }) =>
   state.seasons.seasons;
-export const selectIsLoading = (state: { seasons: SeasonState }) =>
+export const selectIsLoadingSeason = (state: { seasons: SeasonState }) =>
   state.seasons.status === "loading";
 export const { reducer: seasonsReducer } = seasonSlice;
 export default seasonSlice;

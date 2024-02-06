@@ -1,18 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import instance from "../helper/Instance";
-
-export type Movie ={
- id: number;
-    vote_average: number;
-    poster_path: string;
-    name: string;
-    original_title: string;
-    backdrop_path: string;
-    overview: string;
-}
+import instance from "../utilites/Instance";
+import { CardsType } from "../constants/Types";
 
 interface MovieState {
-  movies: Movie[];
+  movies: CardsType[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -21,8 +12,8 @@ export const fetchMovies = createAsyncThunk("movies/fetchMovies", async () => {
   try {
     const response = await instance.get("trending/movie/day?language=en-US");
     return response.data.results;
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    throw new Error(error?.message ?? "Fetch movies error");
   }
 });
 

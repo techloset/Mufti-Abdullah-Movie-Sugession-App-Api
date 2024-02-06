@@ -5,6 +5,12 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'roboto': ['Roboto', 'sans-serif'],
+    },
+    colors: {
+      'input': '#D9D9D9',
+    }
   },
   plugins: [],
 }
