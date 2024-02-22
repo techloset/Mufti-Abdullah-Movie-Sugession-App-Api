@@ -6,17 +6,17 @@ const SeasonCard: React.FC<CardProps> = ({ imageUrl, name, rating }) => {
   return (
     <>
       <div
-        className="relative rounded-[1.5rem]  cursor-pointer overflow-hidden transition-transform transform-gpu mb-5 hover:scale-105 sm:h-[202px] h-auto sm:w-[305px] w-[w-[305px]]"
+        className="relative md:bg-[white] sm:bg-[#EBEAEA]  rounded-[1.5rem]  cursor-pointer overflow-hidden transition-transform transform-gpu mb-5 hover:scale-105 sm:h-[202px] h-auto sm:w-[305px] w-[w-[305px]]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <img
           src={`https://image.tmdb.org/t/p/original/${imageUrl}`}
           alt="Movie Poster"
-          className="w-full h-2/3 object-cover"
+          className="w-full h-2/3 object-cover  rounded-[1.5rem]"
         />
-        <h3 className="font-bold text-[20px] leading-9 mt-2">
-          {name?.slice(0, 30) + ".."}
+        <h3 className="font-bold text-[20px] ps-2 leading-9 mt-2">
+          {name?.slice(0, 20) + ".."}
         </h3>
 
         <div

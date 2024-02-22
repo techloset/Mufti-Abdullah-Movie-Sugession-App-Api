@@ -20,7 +20,7 @@ const MovieCard: React.FC<CardProps> = ({ imageUrl, movieId, rating }) => {
       <img
         src={`https://image.tmdb.org/t/p/original/${imageUrl}`}
         alt="Movie Poster"
-        className="w-full h-full object-cover"
+        className="w-full h-[263px] object-cover"
       />
       <div
         className={`absolute top-0 left-0 flex items-center space-x-1 p-2 bg-black bg-opacity-75 transition-opacity duration-300 ${

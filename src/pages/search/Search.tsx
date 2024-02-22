@@ -42,11 +42,13 @@ const Search = () => {
     });
   };
   return (
-    <>
+    <div className="md:bg-[#EBEAEA] sm:bg-[white]">
       <Navbar
-        searchPlaceholder={"Search Movies and Series here"}
+        searchPlaceholder={"Search Movies & Series here"}
         onSearchChange={handleSearchChange}
-        showSearchButton={true}
+        // showSearchButton={true}
+        showPlusButton={true}
+        isSearchVisible={true}
       />
 
       <div className="container mx-auto p-4 font-roboto ">
@@ -81,7 +83,7 @@ const Search = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

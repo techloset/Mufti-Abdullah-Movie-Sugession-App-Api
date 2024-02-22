@@ -37,9 +37,9 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div className="md:bg-[#EBEAEA] sm:bg-[white]">
       <Navbar
-        searchPlaceholder={"🔍 Search a movie or a series"}
+        searchPlaceholder={"🔍 Search movie or a series"}
         onSearchChange={handleSearchChange}
         showSearchButton={true}
         showPlusButton={true}
@@ -77,10 +77,7 @@ export default function Home() {
                 </h1>
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
                   {movies.slice(0, 8).map((movie) => (
-                    <div
-                      key={movie.id}
-                      // className="col-span-12 sm:col-span-6 md:col-span-3"
-                    >
+                    <div key={movie.id}>
                       <MovieCard
                         imageUrl={movie.poster_path}
                         movieId={movie.id}
@@ -100,9 +97,9 @@ export default function Home() {
               Popular Released
             </h1>
             {isDesktop ? (
-              <div className="flex flex-row overflow-x-auto scrollbar-hidden  gap-4">
+              <div className="flex flex-row overflow-x-auto h-[263px]  py-2 px-3 scrollbar-hidden  gap-4">
                 {movies.map((movie) => (
-                  <div key={movie.id}>
+                  <div key={movie.id} className="">
                     <MovieCard
                       imageUrl={movie.poster_path}
                       movieId={movie.id}
@@ -127,6 +124,6 @@ export default function Home() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

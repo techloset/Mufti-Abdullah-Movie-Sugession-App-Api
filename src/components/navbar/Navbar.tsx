@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import PlusIcon from "../../assets/icons/+.png";
 interface NavbarProps {
   searchPlaceholder: string;
   onSearchChange: (query: string) => void;
   showSearchButton?: boolean;
   showPlusButton?: boolean;
+  isSearchVisible?: boolean;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -13,14 +14,11 @@ const Navbar: React.FC<NavbarProps> = ({
   onSearchChange,
   showSearchButton,
   showPlusButton,
+  isSearchVisible,
 }) => {
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  const toggleSearch = () => {
-    setIsSearchVisible((prev) => !prev);
-  };
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
@@ -45,53 +43,56 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <nav className="p-4 w-full">
+    <nav className="p-4 w-full ">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="text-black font-roboto text-[35px] font-semibold leading-[30px]">
-          <Link to="/">
-            The <br />
-            Movie <br />
-            Tracker
+        <div className=" max-w-[130px] max-h-[106px]">
+          <Link
+            to="/"
+            className="text-[black] font-roboto text-[35px] font-semibold leading-[36px]"
+          >
+            The Movie Tracker
           </Link>
         </div>
         <div className="flex-grow flex items-center justify-end sm:hidden">
           {showSearchButton && (
-            <button
-              className="text-white focus:outline-none text-[20px] font-bold"
-              onClick={toggleSearch}
-            >
-              🔍
-            </button>
+            <Link to="/search">
+              <button className=" bg-input h-[37px] w-[39px] rounded-[30px] focus:outline-none text-[20px] font-bold">
+                <span className="w-[14px] h-[20px]">🔍</span>
+              </button>
+            </Link>
           )}
           {showPlusButton && (
-            <button className="text-black ms-1 focus:outline-none text-[30px] font-bold">
-              +
+            <button className=" ms-[20px] text-center  bg-input h-[37px] w-[39px] rounded-[30px] focus:outline-none  font-bold">
+              <img src={PlusIcon} className="ps-2.5" alt="Plus Icon Image" />
             </button>
           )}
         </div>
         <div
           className={`flex-grow  items-center justify-center sm:flex hidden`}
         >
-          <form onSubmit={handleSearchSubmit}>
+          <form
+            onSubmit={handleSearchSubmit}
+            className="sm:w-full md:w-[630px] rounded-[30px] bg-input h-[57px]  py-[14px] px-[185px]  focus:ring focus:border-blue-300"
+          >
             <input
               type="text"
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="px-4 py-2 rounded-[30px] focus:outline-none text-center bg-input  focus:ring focus:border-blue-300 sm:w-full md:w-[630px] lg:w-[40rem] h-[57px]"
+              className="placeholder-[black] text-[20px] font-normal leading-[23px] text-center font-roboto text-[black] focus:outline-none  bg-input  w-[259px] h-[23px] "
             />
           </form>
         </div>
       </div>
       {isSearchVisible && (
-        <div className="container mx-auto my-5 sm:hidden  flex items-center justify-center transition-all duration-2000 ease-in-out">
+        <div className="container mx-auto my-5 sm:hidden   flex items-center justify-center transition-all duration-2000 ease-in-out">
           <form onSubmit={handleSearchSubmit}>
             <input
               type="text"
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="px-4 py-2 rounded-[30px] focus:outline-none text-center bg-input  focus:ring focus:border-blue-300 sm:w-full md:w-[630px] lg:w-[40rem] h-[57px]"
+              className="px-4 py-2 rounded-[30px] text-[12px] font-normal leading-[14px]  font-roboto placeholder-[black] focus:outline-none text-center bg-input  focus:ring focus:border-blue-300 w-[350px]   h-[57px]"
             />
           </form>
         </div>

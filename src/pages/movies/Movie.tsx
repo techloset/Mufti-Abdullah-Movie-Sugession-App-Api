@@ -1,4 +1,3 @@
-// Important Notice that when data is get from the search page and you refresh the page then qury is null and data can not show here.
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +37,6 @@ export default function Movie() {
   const [movieData, setMovieData] = useState<
     CardsType | CardsType | CardsType | null
   >(null);
-  // Inside the useEffect where you fetch movies and series
   useEffect(() => {
     dispatch(fetchMovies());
     dispatch(fetchSeries());
@@ -47,7 +45,6 @@ export default function Movie() {
     });
   }, [dispatch]);
 
-  // Inside the second useEffect where you setMovieData
   useEffect(() => {
     const matchedMovie = movies.find(
       (movie) => movie.id.toString() === movieId
@@ -72,10 +69,10 @@ export default function Movie() {
   const lastSearchResult = searchs[searchs.length - 1];
 
   return (
-    <>
+    <div className="md:bg-[#EBEAEA] sm:bg-[white]">
       <Navbar
         showSearchButton={true}
-        searchPlaceholder={"Seach Seasons here"}
+        searchPlaceholder={"Seach Season here"}
         onSearchChange={function (query: string): void {
           throw new Error("Function not implemented.");
         }}
@@ -85,19 +82,16 @@ export default function Movie() {
       ) : (
         (movieData || lastSearchResult) && (
           <>
-            <div className="container mx-auto p-4 font-roboto">
+            <div className="container mx-auto p-4 font-roboto]">
               <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-1">
                 <div className="col-span  sm:w-full">
-                  <p className=" font-bold text-[40px] font-roboto leading-9 my-4">
+                  <p className=" font-bold text-[40px] font-roboto leading-9 sm:my-0 md:my-4">
                     {(movieData || lastSearchResult)?.original_title}
                   </p>
                 </div>
 
                 <div className="col-span  flex-row justify-end p-2 sm:flex hidden gap-x-6">
-                  <button
-                    className="bg-[#D9D9D9] hover:bg-[#D2D2D2] flex flex-row rounded-full p-4 cursor-pointer text-black"
-                    disabled={isLoading}
-                  >
+                  <button className="bg-input hover:bg-[#D2D2D2] flex place-items-center flex-row rounded-full p-4 cursor-pointer text-black w-[197px] h-[45.1px]">
                     <img
                       src={Icon}
                       alt=""
@@ -112,9 +106,9 @@ export default function Movie() {
                 <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-2">
                   {/* Container for Poster Image */}
                   <div className="flex sm:flex-row flex-col z-10 relative">
-                    <div className="sm:w-[196px]  w-[98px] my-auto relative md:top-0 md:left-0 top-16 left-8">
+                    <div className="md:w-[196px] w-[98px] my-0 relative md:top-0 md:left-0 top-28 left-8">
                       <img
-                        className="sm:w-[98px] md:w-full lg:w-[196px] rounded-[2rem]"
+                        className="sm-w-[98px] w-[196px] sm:h-[291px] h-[146px] rounded-[20px]"
                         src={`https://image.tmdb.org/t/p/original/${
                           (movieData || lastSearchResult)?.poster_path
                         }`}
@@ -122,20 +116,20 @@ export default function Movie() {
                       />
                     </div>
 
-                    <div className="my-5 sm:w-[413px] w-[334px] sm:ps-5 ps-0 flex flex-col pe-2 relative md:top-0 md:left-0 top-16 left-2">
-                      <div className="flex flex-row text-[18px]">
-                        <span className="rounded-full border-2 border-black border-solid px-3 py-1 me-2">
+                    <div className="my-5 sm:w-[413px] w-[334px] sm:ps-5 ps-0 flex flex-col pe-2 relative md:top-0 md:left-0 top-28 left-2">
+                      <div className="flex flex-row text-[18px] justify-start  content-center text-center ">
+                        <span className="rounded-full w-[88px] font-roboto border-[1px] text-[18px] border-black font-medium leading-[21px] border-solid  h-[33px]   py-1.5 me-2.5">
                           Action
                         </span>
-                        <span className="rounded-full border-2 border-black border-solid px-3 py-1 ms-2">
-                          Sci Fiction
+                        <span className="rounded-full w-[88px] font-roboto border-[1px] text-[18px] border-black font-medium leading-[21px] border-solid  h-[33px]   py-[5px] ms-2.5">
+                          Sci-Fr
                         </span>
                       </div>
-                      <p className="color-black font-medium text-[18px] text-wrap w-auto mt-4 mb-10">
+                      <p className="font-medium text-[18px] text-wrap w-auto mt-4 mb-10">
                         {(movieData || lastSearchResult)?.overview.slice(
                           0,
-                          300
-                        )}
+                          200
+                        ) + "..."}
                       </p>
                       <h3 className="text-[18px] font-normal font-roboto">
                         IBM Rating
@@ -151,10 +145,10 @@ export default function Movie() {
                       )}
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 w-auto md:static relative top-[-570px]">
-                    <div className="ms-auto my-5 h-auto w-auto">
+                  <div className="grid grid-cols-1  md:static relative bottom-[470px]">
+                    <div className="lg:ms-auto md:ms-20 sm:my-0 my-5 h-[187px] sm:w-[334px] md:w-[521px] md:h-[291px]">
                       <img
-                        className="rounded-[20px] md:w-full lg:w-[521px] sm:w-[334] h-full"
+                        className="rounded-[20px] lg:w-[521px] md:w-[521px] sm:w-[334px] md:h-[291px] sm:h-[187px]"
                         src={`https://image.tmdb.org/t/p/original/${
                           (movieData || lastSearchResult)?.backdrop_path
                         }`}
@@ -171,24 +165,26 @@ export default function Movie() {
       {isLoadingSeason ? (
         <Loader />
       ) : (
-        <div className="container   md:my-2  mx-auto py-4 font-roboto">
-          <div className="grid grid-cols-2 gap-4 mb-6 ">
+        <div className="container  md:mb-2  mx-auto py-4 font-roboto">
+          <div className="grid grid-cols-1 gap-4 mb-6 ">
             <div className="flex flex-row gap-4">
-              <h1 className="font-bold text-[30px] leading-9 my-auto mx-2">
+              <h1 className="font-bold text-[30px] leading-9 my-auto ms-2">
                 Seasons
               </h1>
-              <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
-                1
-              </span>
-              <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
-                2
-              </span>
-              <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
-                3
-              </span>
-              <span className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-xl p-3  bg-[#D9D9D9] text-black text-[20px] font-bold">
-                4
-              </span>
+              <div className="flex flex-row flex-wrap justify-center content-center gap-2  ms-[20px]">
+                <h5 className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-[10px] py-2 px-4  bg-[#D9D9D9] w-[43.3px] h-[43.3px]  text-black text-[20px] font-bold">
+                  1
+                </h5>
+                <h5 className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-[10px] py-2 px-4  text-center  bg-[#D9D9D9] w-[43.3px] h-[43.3px]  text-black text-[20px] font-bold">
+                  2
+                </h5>
+                <h5 className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-[10px] py-2 px-4  bg-[#D9D9D9] w-[43.3px] h-[43.3px]  text-black text-[20px] font-bold">
+                  3
+                </h5>
+                <h5 className="cursor-pointer  hover:bg-[#D2D2D2] flex flex-row rounded-[10px] py-2 px-4  bg-[#D9D9D9] w-[43.3px] h-[43.3px]  text-black text-[20px] font-bold">
+                  4
+                </h5>
+              </div>
             </div>
           </div>
 
@@ -206,6 +202,6 @@ export default function Movie() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
