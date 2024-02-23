@@ -44,7 +44,7 @@ const Search = () => {
   return (
     <div className="md:bg-[#EBEAEA] sm:bg-[white]">
       <Navbar
-        searchPlaceholder={"Search Movies & Series here"}
+        searchPlaceholder={"🔍Search Movies & Series here"}
         onSearchChange={handleSearchChange}
         // showSearchButton={true}
         showPlusButton={true}

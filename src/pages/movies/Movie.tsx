@@ -85,7 +85,7 @@ export default function Movie() {
             <div className="container mx-auto p-4 font-roboto]">
               <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-1">
                 <div className="col-span  sm:w-full">
-                  <p className=" font-bold text-[40px] font-roboto leading-9 sm:my-0 md:my-4">
+                  <p className=" font-bold md:text-[40px] sm:text-[30px] font-roboto md:leading-9 sm:leading-8 sm:my-0 md:my-4">
                     {(movieData || lastSearchResult)?.original_title}
                   </p>
                 </div>
@@ -103,10 +103,10 @@ export default function Movie() {
               </div>
               {/* description section */}
               <div className="container mx-auto py-4">
-                <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-2">
+                <div className="grid lg:grid-cols-2 sm:grid-cols-1  gap-2">
                   {/* Container for Poster Image */}
                   <div className="flex sm:flex-row flex-col z-10 relative">
-                    <div className="md:w-[196px] w-[98px] my-0 relative md:top-0 md:left-0 top-28 left-8">
+                    <div className="md:w-[196px] w-[98px] my-0 relative md:top-0 md:left-0 top-36 left-8">
                       <img
                         className="sm-w-[98px] w-[196px] sm:h-[291px] h-[146px] rounded-[20px]"
                         src={`https://image.tmdb.org/t/p/original/${
@@ -116,7 +116,7 @@ export default function Movie() {
                       />
                     </div>
 
-                    <div className="my-5 sm:w-[413px] w-[334px] sm:ps-5 ps-0 flex flex-col pe-2 relative md:top-0 md:left-0 top-28 left-2">
+                    <div className="my-5 sm:w-[413px] w-[334px] sm:ps-5 ps-0 flex flex-col pe-2 relative md:top-0 md:left-0 top-36 left-2">
                       <div className="flex flex-row text-[18px] justify-start  content-center text-center ">
                         <span className="rounded-full w-[88px] font-roboto border-[1px] text-[18px] border-black font-medium leading-[21px] border-solid  h-[33px]   py-1.5 me-2.5">
                           Action
@@ -145,8 +145,8 @@ export default function Movie() {
                       )}
                     </div>
                   </div>
-                  <div className="grid grid-cols-1  md:static relative bottom-[470px]">
-                    <div className="lg:ms-auto md:ms-20 sm:my-0 my-5 h-[187px] sm:w-[334px] md:w-[521px] md:h-[291px]">
+                  <div className="grid grid-cols-1  md:static relative bottom-[415px]">
+                    <div className="lg:ms-auto md:ms-20 sm:my-0 my-0 sm:h-[187px] sm:w-[334px] md:w-[521px] md:h-[291px]">
                       <img
                         className="rounded-[20px] lg:w-[521px] md:w-[521px] sm:w-[334px] md:h-[291px] sm:h-[187px]"
                         src={`https://image.tmdb.org/t/p/original/${
